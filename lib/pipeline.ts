@@ -11,7 +11,6 @@ export class Pipeline extends Stack {
     constructor(scope: Construct, id: string, props?: StackProps) {
         super(scope, id, props);
 
-        new Pipeline(this, 'bla', {})
         const pipeline = new CodePipeline(this, 'Pipeline', {
             pipelineName: 'cdk-v2-service',
             synth: new ShellStep('Synth', {
@@ -38,6 +37,10 @@ export class Pipeline extends Stack {
             // }
         });
 
+        pipeline.addStage(new ServiceStage(this, 'ServiceStage', {}));
+
+        pipeline.buildPipeline();
+
         pipeline.pipeline.addToRolePolicy(
             new PolicyStatement({
                 sid: 'ssm',
@@ -50,7 +53,5 @@ export class Pipeline extends Stack {
                 ]
             })
         );
-
-        pipeline.addStage(new ServiceStage(this, 'ServiceStage', {}));
     }
 }
