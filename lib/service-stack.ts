@@ -29,7 +29,7 @@ export class ServiceStack extends Stack {
                 },
                 forceDockerBundling: false,
                 preCompilation: true,
-                dockerImage: DockerImage.fromRegistry('public.ecr.aws/lambda/nodejs:14-arm64'), //required for Graviton2 Architecture
+                // dockerImage: DockerImage.fromRegistry('public.ecr.aws/lambda/nodejs:14-arm64'), //required for Graviton2 Architecture
                 commandHooks: {
                     beforeBundling(): string[] {
                         return []
