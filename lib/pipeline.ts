@@ -19,7 +19,6 @@ export class Pipeline extends Stack {
                     'npm i -g npm && npm install -g typescript@4.0.2 && npm install -g tslint@5.5.0 && npm ci'
                 ],
                 commands: [
-                    'npx run lint',
                     'npx run build',
                     'npx cdk synth'
                 ]
