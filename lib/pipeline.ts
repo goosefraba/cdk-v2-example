@@ -4,6 +4,7 @@ import {CodePipeline, CodePipelineSource, ShellStep} from 'aws-cdk-lib/pipelines
 import {Repository} from 'aws-cdk-lib/aws-codecommit';
 import {Effect, PolicyStatement} from 'aws-cdk-lib/aws-iam';
 import {ServiceStage} from './service-stage';
+import {ComputeType} from 'aws-cdk-lib/aws-codebuild';
 
 // import * as sqs from 'aws-cdk-lib/aws-sqs';
 
@@ -24,17 +25,17 @@ export class Pipeline extends Stack {
                     'npx cdk synth'
                 ]
             }),
-            // synthCodeBuildDefaults: {
-            //     buildEnvironment: {
-            //         computeType: ComputeType.SMALL,
-            //         privileged: true,
-            //         buildImage: {
-            //             imageId: '',
-            //             defaultComputeType: ComputeType.SMALL,
-            //         }
-            //     }
-            //     DockerImage.fromRegistry('public.ecr.aws/lambda/nodejs:14-arm64')
-            // }
+            synthCodeBuildDefaults: {
+                buildEnvironment: {
+                    computeType: ComputeType.SMALL,
+                    privileged: true
+                    // buildImage: {
+                    //     imageId: '',
+                    //     defaultComputeType: ComputeType.SMALL,
+                    // }
+                }
+                // DockerImage.fromRegistry('public.ecr.aws/lambda/nodejs:14-arm64')
+            }
         });
 
         pipeline.addStage(new ServiceStage(this, 'ServiceStage', {}));
