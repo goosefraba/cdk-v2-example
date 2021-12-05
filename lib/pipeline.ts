@@ -16,9 +16,10 @@ export class Pipeline extends Stack {
             synth: new ShellStep('Synth', {
                 input: CodePipelineSource.codeCommit(Repository.fromRepositoryName(this, 'CodeRepository', 'cdk-v2-service'), 'master'),
                 installCommands: [
-                    'npm i -g npm && npm install -g typescript@4.0.2 && npm install -g tslint@5.5.0 && npm ci'
+                    'npm i -g npm && npm install -g typescript@4.0.2 && npm install -g tslint@5.5.0'
                 ],
                 commands: [
+                    'npm ci',
                     'npm run build',
                     'npx cdk synth'
                 ]
@@ -38,19 +39,19 @@ export class Pipeline extends Stack {
 
         pipeline.addStage(new ServiceStage(this, 'ServiceStage', {}));
 
-        pipeline.buildPipeline();
-
-        pipeline.pipeline.addToRolePolicy(
-            new PolicyStatement({
-                sid: 'ssm',
-                effect: Effect.ALLOW,
-                actions: [
-                    'ssm:GetParameter'
-                ],
-                resources: [
-                    `arn:aws:ssm:${this.region}:${this.account}:parameter/*`,
-                ]
-            })
-        );
+        // pipeline.buildPipeline();
+        //
+        // pipeline.pipeline.addToRolePolicy(
+        //     new PolicyStatement({
+        //         sid: 'ssm',
+        //         effect: Effect.ALLOW,
+        //         actions: [
+        //             'ssm:GetParameter'
+        //         ],
+        //         resources: [
+        //             `arn:aws:ssm:${this.region}:${this.account}:parameter/*`,
+        //         ]
+        //     })
+        // );
     }
 }
