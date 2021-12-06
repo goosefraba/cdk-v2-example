@@ -5,7 +5,6 @@ import {Repository} from 'aws-cdk-lib/aws-codecommit';
 import {Effect, PolicyStatement} from 'aws-cdk-lib/aws-iam';
 import {ServiceStage} from './service-stage';
 import {BuildEnvironmentVariableType, ComputeType} from 'aws-cdk-lib/aws-codebuild';
-import {Secret} from 'aws-cdk-lib/aws-secretsmanager';
 
 // import * as sqs from 'aws-cdk-lib/aws-sqs';
 
@@ -39,12 +38,34 @@ export class Pipeline extends Stack {
                             type: BuildEnvironmentVariableType.SECRETS_MANAGER,
                             value: SECRET_MANAGER_NPM_TOKEN_NAME
                         }
-                    }
+                    },
                     // buildImage: {
                     //     imageId: '',
                     //     defaultComputeType: ComputeType.SMALL,
                     // }
-                }
+                },
+                rolePolicy: [
+                    new PolicyStatement({
+                        sid: 'ssm',
+                        effect: Effect.ALLOW,
+                        actions: [
+                            'ssm:GetParameter'
+                        ],
+                        resources: [
+                            `arn:aws:ssm:${this.region}:${this.account}:parameter/*`,
+                        ]
+                    }),
+                    new PolicyStatement({
+                        sid: 'secrets',
+                        effect: Effect.ALLOW,
+                        actions: [
+                            'secretsmanager:GetSecretValue'
+                        ],
+                        resources: [
+                            `arn:aws:secretsmanager:${this.region}:${this.account}:secret:appointmed-infrastructure/3rdparty/npm-ZlotH6`
+                        ]
+                    })
+                ]
                 // DockerImage.fromRegistry('public.ecr.aws/lambda/nodejs:14-arm64')
             }
         });
