@@ -4,7 +4,7 @@ import {CodePipeline, CodePipelineSource, ShellStep} from 'aws-cdk-lib/pipelines
 import {Repository} from 'aws-cdk-lib/aws-codecommit';
 import {Effect, PolicyStatement} from 'aws-cdk-lib/aws-iam';
 import {ServiceStage} from './service-stage';
-import {BuildEnvironmentVariableType, ComputeType} from 'aws-cdk-lib/aws-codebuild';
+import {BuildEnvironmentVariableType, ComputeType, LinuxBuildImage} from 'aws-cdk-lib/aws-codebuild';
 import {Secret} from 'aws-cdk-lib/aws-secretsmanager';
 
 // import * as sqs from 'aws-cdk-lib/aws-sqs';
@@ -25,6 +25,7 @@ export class Pipeline extends Stack {
                     'echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc && npm i -g npm && npm install -g typescript@4.0.2 && npm install -g tslint@5.5.0'
                 ],
                 commands: [
+                    'npm install -g aws-cdk',
                     'npm ci',
                     'npm run build',
                     'npx cdk synth'
@@ -40,6 +41,7 @@ export class Pipeline extends Stack {
                             value: SECRET_MANAGER_NPM_TOKEN_NAME
                         }
                     },
+                    buildImage: LinuxBuildImage.fromCodeBuildImageId('aws/codebuild/amazonlinux2-aarch64-standard:2.0')
                     // buildImage: {
                     //     imageId: '',
                     //     defaultComputeType: ComputeType.SMALL,
