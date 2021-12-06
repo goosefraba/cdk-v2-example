@@ -2,7 +2,7 @@ import {DockerImage, Stack} from 'aws-cdk-lib';
 import {Construct} from 'constructs';
 import {Topic} from 'aws-cdk-lib/aws-sns';
 import {NodejsFunction} from 'aws-cdk-lib/aws-lambda-nodejs';
-import {Runtime} from 'aws-cdk-lib/aws-lambda';
+import {Architecture, Runtime} from 'aws-cdk-lib/aws-lambda';
 
 export class ServiceStack extends Stack {
 
@@ -15,6 +15,7 @@ export class ServiceStack extends Stack {
             runtime: Runtime.NODEJS_14_X,
             memorySize: 1024,
             awsSdkConnectionReuse: true,
+            architecture: Architecture.ARM_64,
             bundling: {
                 externalModules: [
                     'aws-sdk'

@@ -41,7 +41,7 @@ export class Pipeline extends Stack {
                             value: SECRET_MANAGER_NPM_TOKEN_NAME
                         }
                     },
-                    buildImage: LinuxBuildImage.fromCodeBuildImageId('aws/codebuild/amazonlinux2-aarch64-standard:2.0')
+                    buildImage: LinuxBuildImage.AMAZON_LINUX_2_ARM
                     // buildImage: {
                     //     imageId: '',
                     //     defaultComputeType: ComputeType.SMALL,
