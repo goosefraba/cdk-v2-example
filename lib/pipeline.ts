@@ -71,7 +71,7 @@ export class Pipeline extends Stack {
             }
         });
 
-        pipeline.addStage(new ServiceStage(this, 'ServiceStage', {npmToken: npmToken}));
+        pipeline.addStage(new ServiceStage(this, 'ServiceStage', {npmToken: npmToken.secretValue.toString()}));
 
         // pipeline.buildPipeline();
         //
