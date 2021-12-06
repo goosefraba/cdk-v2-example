@@ -4,9 +4,11 @@ import {CodePipeline, CodePipelineSource, ShellStep} from 'aws-cdk-lib/pipelines
 import {Repository} from 'aws-cdk-lib/aws-codecommit';
 import {Effect, PolicyStatement} from 'aws-cdk-lib/aws-iam';
 import {ServiceStage} from './service-stage';
-import {ComputeType} from 'aws-cdk-lib/aws-codebuild';
+import {BuildEnvironmentVariableType, ComputeType} from 'aws-cdk-lib/aws-codebuild';
 
 // import * as sqs from 'aws-cdk-lib/aws-sqs';
+
+const SECRET_MANAGER_NPM_TOKEN_NAME = 'appointmed-infrastructure/3rdparty/npm';
 
 export class Pipeline extends Stack {
     constructor(scope: Construct, id: string, props?: StackProps) {
@@ -28,7 +30,13 @@ export class Pipeline extends Stack {
             synthCodeBuildDefaults: {
                 buildEnvironment: {
                     computeType: ComputeType.SMALL,
-                    privileged: true
+                    privileged: true,
+                    environmentVariables: {
+                        NPM_TOKEN: {
+                            type: BuildEnvironmentVariableType.SECRETS_MANAGER,
+                            value: SECRET_MANAGER_NPM_TOKEN_NAME
+                        }
+                    }
                     // buildImage: {
                     //     imageId: '',
                     //     defaultComputeType: ComputeType.SMALL,
