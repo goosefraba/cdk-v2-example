@@ -15,7 +15,7 @@ export class Pipeline extends Stack {
     constructor(scope: Construct, id: string, props?: StackProps) {
         super(scope, id, props);
 
-        const npmToken = Secret.fromSecretNameV2(this, 'NpmTokenSecret', SECRET_MANAGER_NPM_TOKEN_NAME);
+        // const npmToken = Secret.fromSecretNameV2(this, 'NpmTokenSecret', SECRET_MANAGER_NPM_TOKEN_NAME);
 
         const pipeline = new CodePipeline(this, 'Pipeline', {
             pipelineName: 'cdk-v2-service',
@@ -49,7 +49,7 @@ export class Pipeline extends Stack {
             }
         });
 
-        pipeline.addStage(new ServiceStage(this, 'ServiceStage', {npmToken: npmToken}));
+        pipeline.addStage(new ServiceStage(this, 'ServiceStage', {npmToken: 'test'}));
 
         // pipeline.buildPipeline();
         //
