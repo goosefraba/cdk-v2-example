@@ -22,7 +22,7 @@ export class Pipeline extends Stack {
             synth: new ShellStep('Synth', {
                 input: CodePipelineSource.codeCommit(Repository.fromRepositoryName(this, 'CodeRepository', 'cdk-v2-service'), 'master'),
                 installCommands: [
-                    'npm i -g npm && npm install -g typescript@4.0.2 && npm install -g tslint@5.5.0'
+                    'echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc && npm i -g npm && npm install -g typescript@4.0.2 && npm install -g tslint@5.5.0'
                 ],
                 commands: [
                     'npm ci',
