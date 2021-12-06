@@ -12,7 +12,7 @@ export class ServiceStage extends Stage {
         new ServiceStack(
             this,
             'ServiceStack',
-            {}
+            properties
         );
     }
 

@@ -38,8 +38,8 @@ export class ServiceStack extends Stack {
                         return [
                             // 'npm update -g npm', //<<- this leads to error when building locally
                             'cd ./asset-input/',
-                            'npm --version'
-                            // 'echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}' > .npmrc '
+                            'npm --version',
+                            'echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}' > .npmrc '
                         ];
                     },
                     afterBundling(): string[] {
