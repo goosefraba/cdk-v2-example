@@ -5,6 +5,7 @@ import {Repository} from 'aws-cdk-lib/aws-codecommit';
 import {Effect, PolicyStatement} from 'aws-cdk-lib/aws-iam';
 import {ServiceStage} from './service-stage';
 import {BuildEnvironmentVariableType, ComputeType} from 'aws-cdk-lib/aws-codebuild';
+import {Secret} from 'aws-cdk-lib/aws-secretsmanager';
 
 // import * as sqs from 'aws-cdk-lib/aws-sqs';
 
@@ -14,7 +15,7 @@ export class Pipeline extends Stack {
     constructor(scope: Construct, id: string, props?: StackProps) {
         super(scope, id, props);
 
-        // const npmToken = Secret.fromSecretNameV2(this, 'NpmTokenSecret', SECRET_MANAGER_NPM_TOKEN_NAME);
+        const npmToken = Secret.fromSecretNameV2(this, 'NpmTokenSecret', SECRET_MANAGER_NPM_TOKEN_NAME);
 
         const pipeline = new CodePipeline(this, 'Pipeline', {
             pipelineName: 'cdk-v2-service',
@@ -70,7 +71,7 @@ export class Pipeline extends Stack {
             }
         });
 
-        pipeline.addStage(new ServiceStage(this, 'ServiceStage', {npmToken: 'test'}));
+        pipeline.addStage(new ServiceStage(this, 'ServiceStage', {npmToken: npmToken}));
 
         // pipeline.buildPipeline();
         //
