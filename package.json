@@ -20,6 +20,7 @@
         "typescript": "~3.9.7"
     },
     "dependencies": {
+        "@appointmed/appointmed-lambda-common": "1.5.7",
         "aws-cdk-lib": "2.0.0",
         "constructs": "^10.0.0",
         "source-map-support": "^0.5.16"
