@@ -1,6 +1,5 @@
-import {DockerImage, Stack} from 'aws-cdk-lib';
+import {Stack} from 'aws-cdk-lib';
 import {Construct} from 'constructs';
-import {Topic} from 'aws-cdk-lib/aws-sns';
 import {NodejsFunction} from 'aws-cdk-lib/aws-lambda-nodejs';
 import {Architecture, Runtime} from 'aws-cdk-lib/aws-lambda';
 
@@ -26,7 +25,6 @@ export class ServiceStack extends Stack {
                 },
                 forceDockerBundling: false,
                 preCompilation: true,
-                // dockerImage: DockerImage.fromRegistry('public.ecr.aws/lambda/nodejs:14-arm64'), //required for Graviton2 Architecture
                 commandHooks: {
                     beforeBundling(): string[] {
                         return []

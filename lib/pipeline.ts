@@ -7,8 +7,6 @@ import {ServiceStage} from './service-stage';
 import {BuildEnvironmentVariableType, ComputeType, LinuxBuildImage} from 'aws-cdk-lib/aws-codebuild';
 import {Secret} from 'aws-cdk-lib/aws-secretsmanager';
 
-// import * as sqs from 'aws-cdk-lib/aws-sqs';
-
 const SECRET_MANAGER_NPM_TOKEN_NAME = 'appointmed-infrastructure/3rdparty/npm';
 
 export class Pipeline extends Stack {
@@ -42,10 +40,6 @@ export class Pipeline extends Stack {
                         }
                     },
                     buildImage: LinuxBuildImage.AMAZON_LINUX_2_ARM
-                    // buildImage: {
-                    //     imageId: '',
-                    //     defaultComputeType: ComputeType.SMALL,
-                    // }
                 },
                 rolePolicy: [
                     new PolicyStatement({
@@ -69,25 +63,9 @@ export class Pipeline extends Stack {
                         ]
                     })
                 ]
-                // DockerImage.fromRegistry('public.ecr.aws/lambda/nodejs:14-arm64')
             }
         });
 
         pipeline.addStage(new ServiceStage(this, 'ServiceStage', {npmToken: npmToken.secretValue.toString()}));
-
-        // pipeline.buildPipeline();
-        //
-        // pipeline.pipeline.addToRolePolicy(
-        //     new PolicyStatement({
-        //         sid: 'ssm',
-        //         effect: Effect.ALLOW,
-        //         actions: [
-        //             'ssm:GetParameter'
-        //         ],
-        //         resources: [
-        //             `arn:aws:ssm:${this.region}:${this.account}:parameter/*`,
-        //         ]
-        //     })
-        // );
     }
 }
