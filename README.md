@@ -1,6 +1,14 @@
 # CDK v2 Example
 
-## Introduction
+# Table of Contents
+1. [Introduction](#introduction)
+2. [Bootstrap](#bootstrap)
+3. [Deployment](#deployment)
+4. [Staging](#staging)
+5. [Useful Commands](#useful-commands)
+
+
+# Introduction
 This example shows how to use CDK v2 and how to provision a lambda function with it.
 
 The project contains:
@@ -8,7 +16,7 @@ The project contains:
 * passing a custom NPM token to the actual build to enable private NPM repository access for npm dependencies
 * stage-support for the pipeline.
 
-## Bootstrap
+# Bootstrap
 
 ### Requirements
 In order to build and deploy the project, you need:
@@ -27,7 +35,7 @@ Now, you can build the project:
     npm run build
 ```
 
-### Deployment
+# Deployment
 After a successful build, you can start the CDK deployment:
 ```
     cdk deploy
@@ -35,7 +43,7 @@ After a successful build, you can start the CDK deployment:
 
 ------------------------------------------------------------------------------------------------------------------------
 
-## Staging
+# Staging
 A word to staging: There are several ways to achieve staging for a CDK based CI/CD pipeline:
 
 1) add multiple stages to your CI / CD pipeline and either deploy automatically to those or use a manual confirmation
@@ -62,7 +70,7 @@ but you can easily use another source provider here (e.g. GitHub).
 
 ------------------------------------------------------------------------------------------------------------------------
 
-## Useful commands
+# Useful commands
 
 * `npm run build`   compile typescript to js
 * `npm run watch`   watch for changes and compile
