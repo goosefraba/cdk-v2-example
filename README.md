@@ -1,5 +1,11 @@
 # CDK v2 Example
 
+This example shows how to use CDK v2 and how to provision a lambda function with it.
+
+The project is written in **Typescript**.
+
+------------------------------------------------------------------------------------------------------------------------
+
 ## Table of Contents
 1. [Introduction](#introduction)
 2. [Bootstrap](#bootstrap)
@@ -7,14 +13,16 @@
 4. [Staging](#staging)
 5. [Useful Commands](#useful-commands)
 
+------------------------------------------------------------------------------------------------------------------------
 
 # Introduction
-This example shows how to use CDK v2 and how to provision a lambda function with it.
 
 The project contains:
 * CI/CD pipeline using CodePipeline
 * passing a custom NPM token to the actual build to enable private NPM repository access for npm dependencies
 * stage-support for the pipeline.
+
+------------------------------------------------------------------------------------------------------------------------
 
 # Bootstrap
 
@@ -34,6 +42,8 @@ Now, you can build the project:
 ```
     npm run build
 ```
+
+------------------------------------------------------------------------------------------------------------------------
 
 # Deployment
 After a successful build, you can start the CDK deployment:
