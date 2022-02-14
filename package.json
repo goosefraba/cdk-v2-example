@@ -21,7 +21,6 @@
         "typescript": "~3.9.7"
     },
     "dependencies": {
-        "@appointmed/appointmed-lambda-common": "1.5.7",
         "aws-sdk": "^2.275.1",
         "aws-cdk-lib": "2.0.0",
         "constructs": "^10.0.0",
