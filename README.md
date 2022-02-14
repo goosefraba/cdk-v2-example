@@ -1,6 +1,6 @@
 # CDK v2 Example
 
-# Table of Contents
+## Table of Contents
 1. [Introduction](#introduction)
 2. [Bootstrap](#bootstrap)
 3. [Deployment](#deployment)
