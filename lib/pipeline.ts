@@ -7,7 +7,7 @@ import { ServiceStage } from './service-stage';
 import { BuildEnvironmentVariableType, ComputeType, LinuxBuildImage } from 'aws-cdk-lib/aws-codebuild';
 import { Secret } from 'aws-cdk-lib/aws-secretsmanager';
 
-const SECRET_MANAGER_NPM_TOKEN_NAME = 'appointmed-infrastructure/3rdparty/npm';
+const SECRET_MANAGER_NPM_TOKEN_NAME = 'infrastructure/3rdparty/npm';
 
 export interface StackConfiguration extends StackProps {
     readonly branchName: string;
