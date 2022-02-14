@@ -17,7 +17,7 @@ The project is written in **Typescript**.
 
 # Introduction
 
-The project contains:
+The example contains:
 * CI/CD pipeline using CodePipeline
 * passing a custom NPM token to the actual build to enable private NPM repository access for npm dependencies
 * stage-support for the pipeline.
