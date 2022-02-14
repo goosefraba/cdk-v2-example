@@ -1,8 +1,66 @@
-# Welcome to your CDK TypeScript project!
+# CDK v2 Example
 
-This is a blank project for TypeScript development with CDK.
+## Introduction
+This example shows how to use CDK v2 and how to provision a lambda function with it.
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+The project contains:
+* CI/CD pipeline using CodePipeline
+* passing a custom NPM token to the actual build to enable private NPM repository access for npm dependencies
+* stage-support for the pipeline.
+
+## Bootstrap
+
+### Requirements
+In order to build and deploy the project, you need:
+* npm
+* typescript: ```npm install -g typescript```
+* cdk: ```npm install -g aws-cdk```
+
+### Install dependencies:
+```
+    npm install
+```
+
+### Build the project
+Now, you can build the project:
+```
+    npm run build
+```
+
+### Deployment
+After a successful build, you can start the CDK deployment:
+```
+    cdk deploy
+```
+
+------------------------------------------------------------------------------------------------------------------------
+
+## Staging
+A word to staging: There are several ways to achieve staging for a CDK based CI/CD pipeline:
+
+1) add multiple stages to your CI / CD pipeline and either deploy automatically to those or use a manual confirmation
+to do so
+2) add another stack here: ```/bin/cdk-v2-service.ts```
+
+While the first approach is the way to go for solo-branch repositories, I'd recommend to use multiple branches
+and maintain a separate CI / CD pipeline for each branch.
+
+You can see, that I define two stacks in ```/bin/cdk-v2-service.ts``` one for each branch and stage.
+I pass on some values for latter use to define stack name, stage name and target branch to use.
+
+You can use ```cdk deploy``` and define which stack you want to deploy: ```cdk deploy my-stack-prod```.
+
+The CI/CD pipeline will make use of the stack deployment and configure its self-mutate step accordingly to update the proper
+(staged) stack.
+
+Just make sure to push your code to two branches and configure the proper branch to use in ```lib/pipeline.ts``` here:
+```
+    input: CodePipelineSource.codeCommit(Repository.fromRepositoryName(this, 'CodeRepository', 'cdk-v2-service'), 'master'),
+```
+Just change the ```master``` branch to what ever you want. Adapt the source to your source provider; in this case I use CodePipeline,
+but you can easily use another source provider here (e.g. GitHub).
+
+------------------------------------------------------------------------------------------------------------------------
 
 ## Useful commands
 

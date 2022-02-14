@@ -4,7 +4,13 @@ import * as cdk from 'aws-cdk-lib';
 import {Pipeline} from '../lib/pipeline';
 
 const app = new cdk.App();
-new Pipeline(app, 'CdkV2ServiceStack', {
+
+const serviceName = 'cdk-v2-service';
+
+new Pipeline(app, 'cdk-v2-service-dev', {
+    branchName: 'dev',
+    stageName: 'dev',
+    serviceName: serviceName
     /* If you don't specify 'env', this stack will be environment-agnostic.
      * Account/Region-dependent features and context lookups will not work,
      * but a single synthesized template can be deployed anywhere. */
@@ -18,4 +24,10 @@ new Pipeline(app, 'CdkV2ServiceStack', {
     // env: { account: '123456789012', region: 'us-east-1' },
 
     /* For more information, see https://docs.aws.amazon.com/cdk/latest/guide/environments.html */
+});
+
+new Pipeline(app, 'cdk-v2-service-prod', {
+    branchName: 'main',
+    stageName: 'prod',
+    serviceName: serviceName
 });
