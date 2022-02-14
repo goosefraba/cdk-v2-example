@@ -22,7 +22,7 @@ The example contains:
 * passing a custom NPM token to the actual build to enable private NPM repository access for npm dependencies
 * stage-support for the pipeline.
 * System Manager Parameter store lookup: Look up a value from the SSM paramter store (in this example: npm token to access private npm repositories)
-* lambda function with code placed within the repository
+* lambda function with code placed within the repository and ARM64 Graviton processor configuration
 
 ------------------------------------------------------------------------------------------------------------------------
 
